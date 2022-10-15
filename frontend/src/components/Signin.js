@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import React from 'react'
 
 const Signin = () => {
-  const navigate = useNavigate();
+  const navigate=useNavigate()
   const [name, setname] = useState('')
   //const[email,setemail]=useState({name:'',email:''})
   const [email, setemail] = useState('')
@@ -28,12 +28,13 @@ const Signin = () => {
           },
           body: JSON.stringify({ name, email }),
         });
-      const dataa = await res.json();
-      if (dataa.status == 400) {
-        alert("unsucessful")
+      const dataa = await res;
+      if (dataa.status == 400||dataa.status===401) {
+        alert("Unsuccessful Login Please try again")
       }
       else {
-        alert("congratulations")
+        alert("Welcome to E-DOKO.Press OK to continue")
+        navigate("/itemlist")
       }
 
 

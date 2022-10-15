@@ -7,6 +7,7 @@ import Signin from "./components/Signin";
 import Home from "./components/Home";
 import Daata from "./components/Daata";
 import Tabs from "./components/Tabs";
+import Cartitems from "./components/Cartitems";
 const App = () => {
   const [tasks, settasks] = useState([
     ""
@@ -52,6 +53,7 @@ const App = () => {
         <Route exact path="/signin" element={<Signin />} />
         <Route exact path="/display" element={<Daata posting={posts} />} />
         <Route exact path="/itemlist" element={<Tabs/>}/>
+        <Route exact path="/cartitemlist" element={<Cartitems/>}/>
       </Routes>
     </div>
 
