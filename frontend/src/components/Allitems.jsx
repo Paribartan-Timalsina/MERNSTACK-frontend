@@ -1,15 +1,15 @@
-import React, { useContext, useState } from 'react'
-import { CartContext } from './Tabs'
+import React, { useContext, useState ,createContext} from 'react'
+import { ProductContext } from './Tabs'
 import Cartitems from './Cartitems'
-
+export const CartContext=createContext()
 const Allitems = () => {
     const [cart,setcart]=useState([])
-    const [items] =useContext(CartContext)
+    const [items] =useContext(ProductContext)
     const addtocart =  (items) => {
-        setcart({...cart},items)
+        setcart((current)=>[...current,items])
     }
-        const postitemstoDB= async (cart)=>{
-         const res = await fetch('http://localhost:5000/addingtocart',
+        const postitemstoDB= async ()=>{
+         const res = await fetch('http://localhost:5000/addingtocart/',
            {
             method: "POST",
             headers: {
@@ -23,7 +23,9 @@ const Allitems = () => {
         }
       
     const gotocart=()=>{
-      postitemstoDB(cart)
+      <CartContext.Provider value={cart}>
+      <Cartitems />
+      </CartContext.Provider>
     console.log(cart)
     }
   return (

@@ -2,7 +2,7 @@
 import React, { useState, useEffect, createContext } from 'react'
 import "../index.css"
 import Allitems from './Allitems'
- export const CartContext=createContext()
+ export const ProductContext=createContext()
 const Tabs = () => {
   const [items, setItems] = useState([]);
   // const [itemname, setitemname] = useState();
@@ -59,9 +59,9 @@ const Tabs = () => {
 
   return (
   
-<CartContext.Provider value={[items]}>
+<ProductContext.Provider value={[items]}>
 <Allitems/>
-</CartContext.Provider>
+</ProductContext.Provider>
 )
 }
    

@@ -1,18 +1,20 @@
-import React from 'react'
-import Allitems from './Allitems'
-const Cartitems = (items) => {
+import React,{useContext} from 'react'
+import Allitems, { CartContext } from './Allitems.jsx'
+
+const Cartitems = () => {
+  const [cartitems]=useContext(CartContext)
+  console.log([cartitems]);
   return (
-    <div className='itemslist'>
-      
-      {
-         
-        items.map((items, key) => {
+    <>
+    {
+       Array.from(cartitems).map((items, key) => {
           // setitemname(items.name)
           // setitemprice(items.price)
           return (
-            <>
+            
            
               <div className='itemslist'>
+
                 <li>
                   <h1>Name:{items.Productname}</h1>
                   <h1> Price:{items.Price}</h1>
@@ -20,14 +22,13 @@ const Cartitems = (items) => {
                  
                 </li>
               </div>
-            </>
+            
           )
 
 
         })}
 
-    </div> 
-
+    </>
   )
 }
 
