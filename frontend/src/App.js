@@ -7,11 +7,13 @@ import Signin from "./components/Signin";
 import Home from "./components/Home";
 import Daata from "./components/Daata";
 import Tabs from "./components/Tabs";
+import Stripe from "./components/Stripe";
 import Cartitems from "./components/Cartitems";
 import Googlelogin from "./components/Googlelogin";
+import Admin from "./components/Admin";
 import { CartContext } from "./components/Allitems";
 const App = () => {
-  const cartitems=useContext(CartContext)
+  
   const [tasks, settasks] = useState([
     ""
   ])
@@ -54,10 +56,12 @@ const App = () => {
         </>} />
         <Route exact path="/show" element={<Tasks tasks={tasks} onDelete={Deletetask} />} />
         <Route exact path="/signin" element={<Signin />} />
+        <Route exact path="/admin/*" element={<Admin />} />
         <Route exact path="/display" element={<Daata posting={posts} />} />
         <Route exact path="/itemlist" element={<Tabs/>}/>
         <Route exact path="/cartitemlist" element={<Cartitems />}/>
         <Route exact path="/googlelogin" element={<Googlelogin/>}/>
+        <Route exact path="/stripe" element={<Stripe/>}/>
       </Routes>
     </div>
 

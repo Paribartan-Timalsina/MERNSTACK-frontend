@@ -23,15 +23,15 @@ const Allitems = () => {
         }
       
     const gotocart=()=>{
-      <CartContext.Provider value={cart}>
-      <Cartitems />
+   return   <CartContext.Provider value={cart}>
+       <Cartitems />
       </CartContext.Provider>
     console.log(cart)
     }
   return (
     <>
     <header>
-       <button onClick={()=>gotocart()}>Go to cart ({cart.length})</button>
+       <button onClick={gotocart}> Go to cart ({cart.length})</button>
     </header>
     
  <div className='itemslist'>

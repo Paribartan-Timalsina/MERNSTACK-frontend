@@ -17,7 +17,7 @@ const Signin = () => {
   // }
   const push = async () => {
     try {
-      const res = await fetch('http://localhost:5000/logeen',
+      const res = await fetch('/logeen',
         {
           method: 'POST',
 
