@@ -1,15 +1,7 @@
 import React from 'react'
 
 const Daata = ({posting}) => {
-    // let res;
-    // const func= async () => {
-    //     const getData= await fetch('http://localhost/5000/things',
-    //     {
-    //         method:"GET"
-    //     })
-    //     const res = await getData.json()
-    //     return res;
-    //       }
+   
   return (
     <>
     <div className="container">

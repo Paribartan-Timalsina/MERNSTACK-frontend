@@ -17,22 +17,22 @@ const App = () => {
   const [tasks, settasks] = useState([
     ""
   ])
-  const [posts, setPosts] = useState([])
-  useEffect(() => {
-    const response = fetch('http://localhost:5000/things/',
-      {
-        method: "GET",
+  
+  // useEffect(() => {
+  //   const response = fetch('http://localhost:5000/things/',
+  //     {
+  //       method: "GET",
 
-        // headers:{
-        //   Accept:"multipart/form-data",
-        //   "Content-Type":"multipart/form-data"
-        // },
-      }
-    )
-      .then((response) => response.json())
-      .then((actualdata) => setPosts(actualdata))
+  //       // headers:{
+  //       //   Accept:"multipart/form-data",
+  //       //   "Content-Type":"multipart/form-data"
+  //       // },
+  //     }
+  //   )
+  //     .then((response) => response.json())
+  //     .then((actualdata) => setPosts(actualdata))
 
-  }, []);
+  // }, []);
   const Deletetask = (id) => {
     settasks(tasks.filter((task) => (
       task.id !== id
@@ -57,7 +57,7 @@ const App = () => {
         <Route exact path="/show" element={<Tasks tasks={tasks} onDelete={Deletetask} />} />
         <Route exact path="/signin" element={<Signin />} />
         <Route exact path="/admin/*" element={<Admin />} />
-        <Route exact path="/display" element={<Daata posting={posts} />} />
+        <Route exact path="/display" element={<Daata  />} />
         <Route exact path="/itemlist" element={<Tabs/>}/>
         <Route exact path="/cartitemlist" element={<Cartitems />}/>
         <Route exact path="/googlelogin" element={<Googlelogin/>}/>

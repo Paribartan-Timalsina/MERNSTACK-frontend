@@ -1,43 +1,38 @@
-import React, { useContext, useState ,createContext} from 'react'
+import React, { useContext, useState ,createContext, useRef} from 'react'
 import { ProductContext } from './Tabs'
-import Cartitems from './Cartitems'
+import { Link } from 'react-router-dom'
+import { useEffect } from 'react'
 export const CartContext=createContext()
+const cartfromStorage=JSON.parse(localStorage.getItem("cart") || "[]")
 const Allitems = () => {
-    const [cart,setcart]=useState([])
+  const[query,setQuery]=useState("")
+    const [cart,setcart]=useState(cartfromStorage)
     const [items] =useContext(ProductContext)
+   
+    useEffect(()=>{
+      localStorage.setItem("cart",JSON.stringify(cart))
+    },[cart])
     const addtocart =  (items) => {
         setcart((current)=>[...current,items])
     }
-        const postitemstoDB= async ()=>{
-         const res = await fetch('http://localhost:5000/addingtocart/',
-           {
-            method: "POST",
-            headers: {
-    
-              'Content-Type': "application/json"
-            },
-            body: JSON.stringify(cart)
-          })
-        const data = await res.json()  
-        return data
-        }
+        
       
-    const gotocart=()=>{
-   return   <CartContext.Provider value={cart}>
-       <Cartitems />
-      </CartContext.Provider>
-    console.log(cart)
-    }
+   
   return (
     <>
+    
+    <input value={query}  onChange={(e)=>setQuery(e.target.value)} type="search"/>
+      
     <header>
-       <button onClick={gotocart}> Go to cart ({cart.length})</button>
+      <Link to ="/cartitemlist"> <button> Go to cart ({cart.length})</button></Link>
     </header>
     
  <div className='itemslist'>
       {
          
-       Array.from(items).map((product, key) => {
+      Array.from( items.filter(data=>{
+        return  query.toLowerCase()===""?data:data.name.toLowerCase().includes(query)
+       })).map((product, key) => {
           // setitemname(items.name)
           // setitemprice(items.price)
           return (
@@ -58,6 +53,7 @@ const Allitems = () => {
         })}
 
     </div> 
+
 
     </>
   )

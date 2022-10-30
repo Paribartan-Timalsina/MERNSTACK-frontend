@@ -9,13 +9,12 @@ import AllOrders from './Adminfolder/AllOrders'
 import Users from './Adminfolder/Users'
  
 const Admin = () => {
-  const [users,setUsers]=useState("")
+  const [users,setUsers]=useState()
     // const userState=useSelector(state=>state.loginUserReducer)
     // const [currentUser]=userState
     const navigate=useNavigate()
-  
-  useEffect(() => {
-     fetch('/about/',
+  const calladminData = async ()=>{
+   const response= await fetch('http://localhost:5000/about/',
       {
         method: "GET",
 
@@ -23,17 +22,39 @@ const Admin = () => {
           Accept: "application/json",
           "Content-Type": "application/json"
         },
-      }
-    )
-      .then((response) => response.json())
-      .then((actualdata) => setUsers(actualdata)
-      )
+        credentials:"include",
+      })
+    const actualData=await response.json()
+    console.log(actualData)
+    setUsers(actualData)
+  }
+  useEffect(() => {
+    calladminData()
+   console.log(users.name)
+    if(users.name!=="Sergio Aguero"){
+            navigate("/itemlist")
+           }
+           
+  //    fetch('/about/',
+  //     {
+  //       method: "GET",
+
+  //       headers:{
+  //         Accept: "application/json",
+  //         "Content-Type": "application/json"
+  //       },
+  //       credentials:"include"
+  //     }
+  //   )
+  //     .then((response) => response.json())
+  //     .then((actualdata) => setUsers(actualdata))
+      
         
-      console.log(users)
-      if(!users.name==="Sergio Aguero"){
-        navigate("/itemlist")
-      }
-  }, 
+  //     console.log(users.name)   
+  //        if(users.name!="Sergio Aguero"){
+  //       navigate("/itemlist")
+  //     }
+   }, 
   
  [] );
  
