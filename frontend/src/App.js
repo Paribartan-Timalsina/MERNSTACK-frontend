@@ -56,7 +56,7 @@ const App = () => {
         </>} />
         <Route exact path="/show" element={<Tasks tasks={tasks} onDelete={Deletetask} />} />
         <Route exact path="/signin" element={<Signin />} />
-        <Route exact path="/admin/*" element={<Admin />} />
+        <Route  path="/admin/*" element={<Admin />} />
         <Route exact path="/display" element={<Daata  />} />
         <Route exact path="/itemlist" element={<Tabs/>}/>
         <Route exact path="/cartitemlist" element={<Cartitems />}/>

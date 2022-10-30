@@ -2,11 +2,11 @@ import {React,useEffect,useState} from 'react'
 import {Row,Col,Button,Container,ButtonGroup} from "react-bootstrap"
 
 import {Routes,Route,useNavigate} from "react-router-dom"
-import Products from './Adminfolder/Products'
-import AddProduct from './Adminfolder/AddProduct'
+import Products from './Adminfolder/Products.jsx'
+import AddProduct from './Adminfolder/AddProduct.jsx'
  
-import AllOrders from './Adminfolder/AllOrders'
-import Users from './Adminfolder/Users'
+import AllOrders from './Adminfolder/AllOrders.jsx'
+import Users from './Adminfolder/Users.jsx'
  
 const Admin = () => {
   const [users,setUsers]=useState()
@@ -14,7 +14,7 @@ const Admin = () => {
     // const [currentUser]=userState
     const navigate=useNavigate()
   const calladminData = async ()=>{
-   const response= await fetch('http://localhost:5000/about/',
+   const response= await fetch('/about',
       {
         method: "GET",
 
@@ -22,18 +22,18 @@ const Admin = () => {
           Accept: "application/json",
           "Content-Type": "application/json"
         },
-        credentials:"include",
+         credentials:"include",
       })
-    const actualData=await response.json()
+    const actualData= await response.json()
     console.log(actualData)
-    setUsers(actualData)
-  }
+    }
+
   useEffect(() => {
     calladminData()
-   console.log(users.name)
-    if(users.name!=="Sergio Aguero"){
-            navigate("/itemlist")
-           }
+  // console.log(users)
+  //   if(users.name!=="Sergio Aguero"){
+  //           navigate("/itemlist")
+  //          }
            
   //    fetch('/about/',
   //     {
@@ -61,33 +61,36 @@ const Admin = () => {
     
     
   return (
+  
     <>
     <Container>
       <Row>
-        <h1>Admin Panel</h1>
-        <Col md={4}>
+        
+        <Col md={2}>
       
-    <ButtonGroup vertical>
-      <Button onClick={()=>navigate("/admin/userlist")}> All Users</Button>
-      <Button  onClick={()=>navigate("/admin/productlist")}>All  </Button>
+    <ButtonGroup vertical style={{minHeight:"400px"}}>
+      <Button onClick={(e)=>navigate("/admin/userlist")}> All Users</Button>
+      <Button  onClick={(e)=>navigate("/admin/productlist")}>All  </Button>
 
       
 
-      <Button  onClick={()=>navigate("/admin/addproduct")}>Add New Items</Button>
-      <Button  onClick={()=>navigate("/admin/orderlist")}>All Orders</Button>
+      <Button  onClick={(e)=>navigate("/admin/addproduct")}>Add New Items</Button>
+      <Button  onClick={(e)=>navigate("/admin/orderlist")}>All Orders</Button>
 
       
     </ButtonGroup>
 
 
         </Col>
-        <Col md={8}>
+        <Col md={8} >
+          <div>
             <Routes>
-                <Route  path="/admin/userlist" component={<Users/>} exact/>
-                <Route  path="/admin/productlist" component={<Products/>} exact/>
-                <Route  path="/admin/orderlist" component={<AllOrders/>} exact/>
-                <Route  path="/admin/addproduct" component={<AddProduct/>} exact/>
+                <Route exact path="/admin/userlist" element={<Users/>} />
+                <Route exact path="/admin/productlist" element={<Products/>} />
+                <Route exact path="/admin/orderlist" element={<AllOrders/>} />
+                <Route exact path="/admin/addproduct" element={<AddProduct/>} />
             </Routes>
+            </div>
         </Col>
       </Row> 
       </Container>
