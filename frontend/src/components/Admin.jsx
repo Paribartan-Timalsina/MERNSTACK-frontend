@@ -70,7 +70,7 @@ const Admin = () => {
       
     <ButtonGroup vertical style={{minHeight:"400px"}}>
       <Button onClick={(e)=>navigate("/admin/userlist")}> All Users</Button>
-      <Button  onClick={(e)=>navigate("/admin/productlist")}>All  </Button>
+      <Button  onClick={(e)=>navigate("/admin/productlist")}>All Products  </Button>
 
       
 
@@ -85,10 +85,10 @@ const Admin = () => {
         <Col md={8} >
           <div>
             <Routes>
-                <Route exact path="/admin/userlist" element={<Users/>} />
-                <Route exact path="/admin/productlist" element={<Products/>} />
-                <Route exact path="/admin/orderlist" element={<AllOrders/>} />
-                <Route exact path="/admin/addproduct" element={<AddProduct/>} />
+                <Route exact path="/userlist" element={<Users/>} />
+                <Route exact path="/productlist" element={<Products/>} />
+                <Route exact path="/orderlist" element={<AllOrders/>} />
+                <Route exact path="/addproduct" element={<AddProduct/>} />
             </Routes>
             </div>
         </Col>
