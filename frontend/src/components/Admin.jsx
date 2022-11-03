@@ -4,7 +4,7 @@ import {Row,Col,Button,Container,ButtonGroup} from "react-bootstrap"
 import {Routes,Route,useNavigate} from "react-router-dom"
 import Products from './Adminfolder/Products.jsx'
 import AddProduct from './Adminfolder/AddProduct.jsx'
- 
+ import axios from "axios"
 import AllOrders from './Adminfolder/AllOrders.jsx'
 import Users from './Adminfolder/Users.jsx'
  
@@ -14,7 +14,7 @@ const Admin = () => {
     // const [currentUser]=userState
     const navigate=useNavigate()
   const calladminData = async ()=>{
-   const response= await fetch('/about',
+    axios.get('/about',
       {
         method: "GET",
 
@@ -23,9 +23,13 @@ const Admin = () => {
           "Content-Type": "application/json"
         },
          credentials:"include",
+      }).then((response)=>{console.log(response.data)
+      if(response.data.name!=="Sergio Aguero"){
+        navigate("/itemlist")
+      }
       })
-    const actualData= await response.json()
-    console.log(actualData)
+      
+   
     }
 
   useEffect(() => {

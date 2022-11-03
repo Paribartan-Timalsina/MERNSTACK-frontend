@@ -11,7 +11,10 @@ import Stripe from "./components/Stripe";
 import Cartitems from "./components/Cartitems";
 import Googlelogin from "./components/Googlelogin";
 import Admin from "./components/Admin";
-import { CartContext } from "./components/Allitems";
+import Logout from "./components/Logout";
+import Productdetail from "./components/Productdetail";
+
+
 const App = () => {
   
   const [tasks, settasks] = useState([
@@ -57,11 +60,13 @@ const App = () => {
         <Route exact path="/show" element={<Tasks tasks={tasks} onDelete={Deletetask} />} />
         <Route exact path="/signin" element={<Signin />} />
         <Route  path="/admin/*" element={<Admin />} />
+        <Route  path="/product/:_id" element={<Productdetail />} />
         <Route exact path="/display" element={<Daata  />} />
         <Route exact path="/itemlist" element={<Tabs/>}/>
         <Route exact path="/cartitemlist" element={<Cartitems />}/>
         <Route exact path="/googlelogin" element={<Googlelogin/>}/>
         <Route exact path="/stripe" element={<Stripe/>}/>
+        <Route exact path="/logout" element={<Logout/>}/>
       </Routes>
     </div>
 

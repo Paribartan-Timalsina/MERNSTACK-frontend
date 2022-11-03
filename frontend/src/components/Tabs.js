@@ -1,10 +1,13 @@
-
+import { useDispatch } from 'react-redux'
 import React, { useState, useEffect, createContext } from 'react'
 import "../index.css"
 import Allitems from './Allitems'
+import { setProducts } from './actions/productAction'
  export const ProductContext=createContext()
+
 const Tabs = () => {
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useState({});
+  const dispatch=useDispatch()
   // const [itemname, setitemname] = useState();
   // const [itemprice, setitemprice] = useState();
   const [itemtocart, setitemtocart] = useState([]);
@@ -24,7 +27,8 @@ const Tabs = () => {
       }
     );
     const actualData = await response.json();
-    setItems(actualData);
+    dispatch(setProducts(actualData));
+    
   }
 
   useEffect(() => {
