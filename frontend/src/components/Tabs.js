@@ -63,7 +63,7 @@ const Tabs = () => {
 
   return (
   
-<ProductContext.Provider value={[items]}>
+<ProductContext.Provider value={[]}>
 <Allitems/>
 </ProductContext.Provider>
 )

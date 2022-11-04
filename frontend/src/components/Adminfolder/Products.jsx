@@ -2,21 +2,17 @@ import React from 'react'
 import { useReducer } from 'react'
 import { useState,useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useDispatch,useSelector } from 'react-redux'
+import { increment,decrement, setProducts } from '../actions/productAction'
 const Products = () => {
-  const reducer=(state,action)=>{
-switch(action.type){
-  case "INCREMENT":
-    return {count:state.count+1}
-}
-  }
-  function increment(){
-    console.log("hii")
-    dispatch({type:"INCREMENT"})
-  }
+ const dispatch=useDispatch()
+ const [query, setQuery] = useState("")
   const navigate=useNavigate()
   const[items,setItems]=useState([])
- const [state,dispatch]=useReducer(reducer,{count:0})
 
+  useEffect(() => {
+    getItems();
+  }, []);
   const deleteitem= async (product)=>{
     console.log(product)
     
@@ -48,42 +44,51 @@ switch(action.type){
       }
     );
     const actualData = await response.json();
-    setItems(actualData);
+    dispatch(setProducts(actualData));
   }
 
-  useEffect(() => {
-    getItems();
-  }, [items]);
+  
+  const products = useSelector((state) => state.allProducts.products)
+ console.log(products)
   return (
     <>
-    {
-       Array.from(items).map((items, key) => {
-          // setitemname(items.name)
-          // setitemprice(items.price)
-          return (
-            
-           
-              <div className='itemslist'>
+  
+        {
 
-                <li>
-                  <h1>Name:{items.Productname}</h1>
-                  <h1> Price:{items.Price}</h1>
-                  <button onClick={increment}>+</button>
-                  <h1> Quantity:{items.Quantity}</h1>
-                  <button>-</button>
-                  <br></br>
-                  <button onClick={() => deleteitem(items.Productname)}>Delete Item</button>
-                 
-                </li>
-              </div>
-            
-          )
+          Array.from(products)
+            .map((product, key) => {
+            const { _id, Productname, Price, Quantity,Category } = product
+            console.log(Productname)
+            // setitemname(items.name)
+            // setitemprice(items.price)
+            return (
+
+              <>
+              {
+
+               
+                  <div>
+                    <li>
+                      <h1>Name:{product.Productname}</h1>
+                      <h1> Price:{product.Price}</h1>
+                      <button onClick={()=>dispatch(increment(product.Quantity))}>+</button>
+                      <h1>Quantity:{product.Quantity}</h1>
+                      <button onClick={()=>dispatch(decrement(product.Quantity))}>-</button>
+                     
+                    </li>
+                  </div>
+                
+              } 
+              </>
+            )
 
 
-        })}
+          })}
 
-    </>
-          )
+      
+
+</>
+)
 
 
        

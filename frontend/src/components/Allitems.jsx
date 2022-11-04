@@ -5,6 +5,7 @@ import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
 import "../index.css"
+import { setcartProducts } from './actions/productAction'
 
 export const CartContext = createContext()
 const cartfromStorage = JSON.parse(localStorage.getItem("cart") || "[]")
@@ -12,15 +13,16 @@ const Allitems = () => {
   const [query, setQuery] = useState("")
   const [cart, setcart] = useState(cartfromStorage)
   const [items] = useContext(ProductContext)
-  const dispatch = useDispatch()
+ const dispatch=useDispatch()
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart))
   }, [cart])
 
 
-  //     const addtocart =  (items) => {
-  //         setcart((current)=>[...current,items])
-  //     }
+      const addtocart =  (items) => {
+        dispatch(setcartProducts(items))
+          setcart((current)=>[...current,items])
+      }
 
 
 
@@ -76,7 +78,7 @@ const Allitems = () => {
             return query.toLowerCase() === "" ? data : data.name.toLowerCase().includes(query)
           })).map((product, key) => {
             const { _id, Productname, Price, Category } = product
-            console.log(Productname)
+            
             // setitemname(items.name)
             // setitemprice(items.price)
             return (
@@ -89,10 +91,11 @@ const Allitems = () => {
                       <h1>Name:{product.Productname}</h1>
                       <h1> Price:{product.Price}</h1>
                       <h1>Category:{product.Category}</h1>
-                      
+                     
                     </li>
                   </div>
                 </Link>
+                <button onClick={()=>addtocart(product)}>Add to cart</button>
               </>
             )
 

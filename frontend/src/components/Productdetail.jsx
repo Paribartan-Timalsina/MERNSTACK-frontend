@@ -1,16 +1,18 @@
 import React from 'react'
-import { useState } from 'react'
-import { useEffect } from 'react'
+import Cartitems from "./Cartitems"
+import { useEffect,useContex,useState ,createContext} from 'react'
 import { useParams } from 'react-router-dom'
-
+import { useDispatch } from 'react-redux'
+import { setcartProducts } from './actions/productAction'
+export const cartContext=createContext()
 const Productdetail = () => {
-  
+  const dispatch=useDispatch()
     const [data,setdata]=useState([])
     const {_id}=useParams()
     console.log(_id)
     useEffect(()=>{
       callsingleProduct()
-      localStorage.setItem("cartlist",JSON.stringify())
+      
   },[])
    const  callsingleProduct= async ()=>{
         const res=await fetch("/singleproduct",{
@@ -27,8 +29,7 @@ const Productdetail = () => {
     }
     
     const addtocart = (item)=>{
-      
-      localStorage.setItem("cartlist",JSON.stringify(item))
+      dispatch(setcartProducts(item));
     }
   return (
     <>

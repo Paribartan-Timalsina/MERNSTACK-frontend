@@ -1,16 +1,19 @@
 import React,{useContext, useState} from 'react'
-import  { CartContext } from './Allitems.jsx'
-
+import  { cartContext } from './Productdetail'
+import { useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 const Cartitems = () => {
+  const cartList=useContext(cartContext)
   const cartfromStorage=JSON.parse(localStorage.getItem("cart") || "[]")
-  
-  
-console.log(cartfromStorage)
+ 
+  const cartProducts=useSelector((state)=>state.cartProducts.cartitems)
+console.log(cartProducts)
   return (
   
     <>
     {
-       Array.from(cartfromStorage).map((items, key) => {
+       Array.from(cartProducts).map((items, key) => {
+        const { _id, Productname, Price, Category } = cartProducts
           // setitemname(items.name)
           // setitemprice(items.price)
           return (
@@ -19,8 +22,8 @@ console.log(cartfromStorage)
               <div className='itemslist'>
 
                 <li>
-                  <h1>Name:{items.Productname}</h1>
-                  <h1> Price:{items.Price}</h1>
+                  <h1>Name:{cartProducts.Productname}</h1>
+                  <h1> Price:{cartProducts.Price}</h1>
                  
                  
                 </li>
