@@ -22,8 +22,8 @@ console.log(cartProducts)
               <div className='itemslist'>
 
                 <li>
-                  <h1>Name:{cartProducts.Productname}</h1>
-                  <h1> Price:{cartProducts.Price}</h1>
+                  <h1>Name:{Productname}</h1>
+                  <h1> Price:{Price}</h1>
                  
                  
                 </li>

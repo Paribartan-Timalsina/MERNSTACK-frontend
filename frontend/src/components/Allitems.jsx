@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
 import "../index.css"
 import { setcartProducts } from './actions/productAction'
+import Cartitems from './Cartitems'
 
 export const CartContext = createContext()
 const cartfromStorage = JSON.parse(localStorage.getItem("cart") || "[]")
@@ -67,10 +68,14 @@ const Allitems = () => {
   //     </>
   //   )
   const products = useSelector((state) => state.allProducts.products)
+  const cartproducts = useSelector((state) => state.cartProducts.cartitems)
 
-  console.log(products)
+  
   return (
     <>
+    <header>
+      <button  onClick={()=>{<Cartitems/>}}>Go to Cart</button>
+    </header>
       <div className='itemslist'>
         {
 

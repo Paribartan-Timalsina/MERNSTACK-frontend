@@ -22,12 +22,12 @@ export const cartproductReducer=(state=cartinitial,{type,payload})=>{
             const item=state.cartitems.find(prod=>prod._id===payload._id)
           const inCart=state.cartitems.find(prod=>prod._id===payload._id?true:false)
 
-          let a= {
+          let a=  {
             ...state,
             cartitems : inCart ? state.cartitems.map(item=>item._id===payload._id?{...item,Quantity:item.Quantity+1}:item):[...state.cartitems,{...payload,Quantity:1}]
            }
-           console.log(a);
-           return a
+           console.log(a)
+          return a
             default:
                 return state;
     }
