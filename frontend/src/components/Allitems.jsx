@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import "../index.css"
 import { setcartProducts } from './actions/productAction'
 import Cartitems from './Cartitems'
@@ -15,14 +16,19 @@ const Allitems = () => {
   const [cart, setcart] = useState(cartfromStorage)
   const [items] = useContext(ProductContext)
  const dispatch=useDispatch()
+ const navigate=useNavigate()
+ const products = useSelector((state) => state.allProducts.products)
+ const cartproducts = useSelector((state) => state.cartProducts.cartitems)
   useEffect(() => {
-    localStorage.setItem("cart", JSON.stringify(cart))
-  }, [cart])
+      
+    localStorage.setItem("cart", JSON.stringify(cartproducts))
+  }, [cartproducts])
 
 
       const addtocart =  (items) => {
         dispatch(setcartProducts(items))
-          setcart((current)=>[...current,items])
+        
+         
       }
 
 
@@ -67,14 +73,14 @@ const Allitems = () => {
 
   //     </>
   //   )
-  const products = useSelector((state) => state.allProducts.products)
-  const cartproducts = useSelector((state) => state.cartProducts.cartitems)
+  
+ 
 
   
   return (
     <>
     <header>
-      <button  onClick={()=>{<Cartitems/>}}>Go to Cart</button>
+     <Link to ="/cartitemlist"> <button  >Go to Cart({cartproducts.length})</button></Link>
     </header>
       <div className='itemslist'>
         {
@@ -108,6 +114,7 @@ const Allitems = () => {
           })}
 
       </div>
+      
     </>
   )
 }

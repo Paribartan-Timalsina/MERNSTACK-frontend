@@ -2,18 +2,53 @@ import React,{useContext, useState} from 'react'
 import  { cartContext } from './Productdetail'
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
-const Cartitems = () => {
+import { increment } from './actions/productAction'
+import {connect} from "react-redux"
+const Cartitems = ({cart}) => {
+  console.log(cart)
+  const dispatch=useDispatch()
   const cartList=useContext(cartContext)
   const cartfromStorage=JSON.parse(localStorage.getItem("cart") || "[]")
- 
-  const cartProducts=useSelector((state)=>state.cartProducts.cartitems)
-console.log(cartProducts)
+  const   paymoney = async (items)=>{
+    try{
+    const res= await fetch("/create-checkout-session",{
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        // items: [
+        //   { id: 1, quantity: 3 },
+        //   { id: 2, quantity: 1 },
+        // ],
+        items
+      }),
+    })
+    .then(res => {
+      if (res.ok) return res.json()
+      return res.json().then(json => Promise.reject(json))
+    })
+    .then(({ url }) => {
+      window.location = url
+    })
+  }catch(err){
+    console.log(err)
+  }
+  }
+  const quantitychange=(items,e)=>{
+    console.log(e)
+dispatch(increment(items,e))
+  }
+//   const cartProducts=useSelector((state)=>state.cartProducts.cartitems)
+// console.log(cartProducts)
   return (
   
     <>
+   
     {
-       Array.from(cartProducts).map((items, key) => {
-        const { _id, Productname, Price, Category } = cartProducts
+       Array.from(cart).map((items, key) => {
+        // const { _id, Productname, Price, Category } = cartProducts
           // setitemname(items.name)
           // setitemprice(items.price)
           return (
@@ -22,9 +57,10 @@ console.log(cartProducts)
               <div className='itemslist'>
 
                 <li>
-                  <h1>Name:{Productname}</h1>
-                  <h1> Price:{Price}</h1>
-                 
+                  <h1>Name:{items.Productname}</h1>
+                  <h1> Price:{items.Price}</h1>
+                  <input type="number" min="1" value={items.Quantity} onChange={(e)=>quantitychange(items,e.target.value)} />
+                 <h3>Total:{items.Price*items.Quantity}</h3>
                  
                 </li>
               </div>
@@ -32,10 +68,17 @@ console.log(cartProducts)
           )
 
 
-        })}
-
+        }
+        
+        )}
+<button onClick={()=>paymoney(cart)}>Checkout</button>
     </>
   )
 }
+const mapStateToProps=state=>{
+  return{
+    cart:state.cartProducts.cartitems
+  }
+}
 
-export default Cartitems
+export default connect(mapStateToProps)(Cartitems)

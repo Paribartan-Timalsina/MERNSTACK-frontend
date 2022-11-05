@@ -6,10 +6,13 @@ export const setProducts=(products)=>{
         payload:products
     }
 }
-export const increment=(Quantity)=>{
+export const increment=(products,value)=>{
     return{
         type:ActionTypes.INCREMENT,
-        payload:Quantity
+        payload:{
+           products: products,
+           value: value
+        }
     }
 }
 export const decrement=(Quantity)=>{

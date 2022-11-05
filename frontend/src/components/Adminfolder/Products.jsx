@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { useDispatch,useSelector } from 'react-redux'
 import { increment,decrement, setProducts } from '../actions/productAction'
 const Products = () => {
+  const products = useSelector((state) => state.allProducts.products)
  const dispatch=useDispatch()
  const [query, setQuery] = useState("")
   const navigate=useNavigate()
@@ -12,6 +13,7 @@ const Products = () => {
 
   useEffect(() => {
     getItems();
+    localStorage.setItem("admin",JSON.stringify(products))
   }, []);
   const deleteitem= async (product)=>{
     console.log(product)
@@ -48,8 +50,27 @@ const Products = () => {
   }
 
   
-  const products = useSelector((state) => state.allProducts.products)
+  
  console.log(products)
+ const quantitychange=(item,e)=>{
+  dispatch(increment(item,e))
+ }
+ const updatedatabase= async ()=>{
+  const res=await fetch("http://localhost:5000/updatedata/",{
+      method:"POST",
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: "application/json",
+
+      },
+      body: JSON.stringify({products}),
+    });
+    
+    
+    
+    
+  }
+ 
   return (
     <>
   
@@ -71,9 +92,9 @@ const Products = () => {
                     <li>
                       <h1>Name:{product.Productname}</h1>
                       <h1> Price:{product.Price}</h1>
-                      <button onClick={()=>dispatch(increment(product.Quantity))}>+</button>
-                      <h1>Quantity:{product.Quantity}</h1>
-                      <button onClick={()=>dispatch(decrement(product.Quantity))}>-</button>
+                      <h1>Quantity:</h1>
+                      <input type="number" min="1" value={product.Quantity} onChange={(e)=>quantitychange(product,e.target.value)}/>
+                     
                      
                     </li>
                   </div>
@@ -85,7 +106,7 @@ const Products = () => {
 
           })}
 
-      
+<button onClick={()=>updatedatabase()}>Update to database</button>
 
 </>
 )

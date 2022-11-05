@@ -12,6 +12,17 @@ export const productReducer=(state=initialState,{type,payload})=>{
 switch(type){ 
     case ActionTypes.SET_PRODUCTS:
         return {...state,products:payload};
+        case ActionTypes.INCREMENT:
+            console.log(state)
+            console.log(payload.products._id)
+            console.log(payload.value)
+            
+           let b= {
+            ...state,
+            products:state.products.map(item=>item._id===payload.products._id?{...item,Quantity:payload.value}:item)
+           }       
+           console.log(b)      
+           return b; 
         default:
             return state;
 }
@@ -28,9 +39,22 @@ export const cartproductReducer=(state=cartinitial,{type,payload})=>{
            }
            console.log(a)
           return a
-            default:
+            
+                case ActionTypes.INCREMENT:
+                console.log(state)
+                console.log(payload.products._id)
+                console.log(payload.value)
+                
+               let b= {
+                ...state,
+                cartitems:state.cartitems.map(item=>item._id===payload.products._id?{...item,Quantity:payload.value}:item)
+               }       
+               console.log(b)      
+               return b; 
+               default:
                 return state;
     }
+
     }
 export const selectedproductReducer=(state={},{type,payload})=>{
     switch(type){ 
@@ -40,13 +64,20 @@ export const selectedproductReducer=(state={},{type,payload})=>{
                 return state;
     }
     }
-    // export const counter=(state=0,{type,payload})=>{
+    // export const counter=(state=cartinitial,{type,payload})=>{
     //     switch(type){ 
+           
     //         case ActionTypes.INCREMENT:
-    //            return {
+    //             console.log(state)
+    //             console.log(payload.products._id)
+    //             console.log(payload.value)
+                
+    //            let a= {
     //             ...state,
-    //             cartitems:state.cartitems.map(item=>item.id===payload?{...cartitems,Quantity:payload.Quantity}:item)
-    //            }              
+    //             cartitems:state.cartitems.map(item=>item._id===payload.products._id?{...item,Quantity:payload.value}:item)
+    //            }       
+    //            console.log(a)      
+    //            return a; 
     //            case ActionTypes.DECREMENT:
     //             return payload-1
                 
