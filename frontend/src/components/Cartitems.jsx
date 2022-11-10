@@ -4,11 +4,15 @@ import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
 import { increment } from './actions/productAction'
 import {connect} from "react-redux"
+import { useEffect } from 'react'
 const Cartitems = ({cart}) => {
   console.log(cart)
   const dispatch=useDispatch()
   const cartList=useContext(cartContext)
-  const cartfromStorage=JSON.parse(localStorage.getItem("cart") || "[]")
+ useEffect(()=>{
+localStorage.setItem("newcart",JSON.stringify(cart))
+ },[cart])
+  
   const   paymoney = async (items)=>{
     try{
     const res= await fetch("/create-checkout-session",{

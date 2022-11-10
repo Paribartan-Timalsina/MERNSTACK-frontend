@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom'
 import "../index.css"
 import { setcartProducts } from './actions/productAction'
 import Cartitems from './Cartitems'
+import Logout from './Logout'
 
 export const CartContext = createContext()
 const cartfromStorage = JSON.parse(localStorage.getItem("cart") || "[]")
@@ -19,10 +20,7 @@ const Allitems = () => {
  const navigate=useNavigate()
  const products = useSelector((state) => state.allProducts.products)
  const cartproducts = useSelector((state) => state.cartProducts.cartitems)
-  useEffect(() => {
-      
-    localStorage.setItem("cart", JSON.stringify(cartproducts))
-  }, [cartproducts])
+ 
 
 
       const addtocart =  (items) => {
@@ -73,12 +71,30 @@ const Allitems = () => {
 
   //     </>
   //   )
-  
+  const logout= async ()=>{
+    const data=await fetch("/logoutt",{
+      method:"POST"
+    })
+    const res=await data
+    if (res.status == 200) {
+      alert("Successful Logout.")
+      navigate("/signin")
+    }
+    else {
+      alert("Logout Unsuccessful")
+      
+    }
+  }
  
 
   
   return (
     <>
+     <header>
+     <Link to="/display"><button >About me</button></Link>
+    <button onClick={()=>{logout()}}>Logout</button>
+     <input value={query}  onChange={(e)=>setQuery(e.target.value)} type="search"/>
+    </header>
     <header>
      <Link to ="/cartitemlist"> <button  >Go to Cart({cartproducts.length})</button></Link>
     </header>

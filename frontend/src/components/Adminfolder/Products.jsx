@@ -63,7 +63,7 @@ const Products = () => {
         Accept: "application/json",
 
       },
-      body: JSON.stringify({products}),
+      body: JSON.stringify(products),
     });
     
     

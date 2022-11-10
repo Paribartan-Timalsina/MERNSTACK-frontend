@@ -24,7 +24,8 @@ const Admin = () => {
         },
          credentials:"include",
       }).then((response)=>{console.log(response.data)
-      if(response.data.name!=="Sergio Aguero"){
+        
+      if(response.data.name!=="Sergio Aguero"||response.status==401){
         navigate("/itemlist")
       }
       })
