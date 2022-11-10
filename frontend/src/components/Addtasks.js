@@ -3,11 +3,13 @@ import { useState } from 'react'
 const Addtasks = ({ Addtaskdiv }) => {
   const [name, setname] = useState('')
   const [email, setroll] = useState('')
-  const [img, setimg] = useState('')
+  const [password, setpassword] = useState('')
+  const [img, setimg] = useState()
   const pushing = async () => {
     const formdata = new FormData()
     formdata.append("name", name)
     formdata.append("email", email)
+    formdata.append("password", password)
     formdata.append("myimage", img)
 
     const res = await fetch('http://localhost:5000/register',
@@ -27,10 +29,11 @@ const Addtasks = ({ Addtaskdiv }) => {
 
     pushing()
 
-    Addtaskdiv({ name, email, img })
+    Addtaskdiv({ name, email, img,password })
     setname('')
     setroll('')
     setimg('')
+    setpassword('')
   }
   return (
 
@@ -42,6 +45,10 @@ const Addtasks = ({ Addtaskdiv }) => {
       <div className='form-control'>
         <label>Email:</label>
         <input type='email' value={email} name="email" onChange={(e) => (setroll(e.target.value))} />
+      </div>
+      <div className='form-control'>
+        <label>Password:</label>
+        <input type='password' value={password} name="password" onChange={(e) => (setpassword(e.target.value))} />
       </div>
       <div className='form-control'>
         <label>profile:</label>

@@ -28,6 +28,9 @@ const Admin = () => {
       if(response.data.name!=="Sergio Aguero"||response.status==401){
         navigate("/itemlist")
       }
+      }).catch((error)=>{
+        console.log(error)
+        navigate("/itemlist")
       })
       
    
