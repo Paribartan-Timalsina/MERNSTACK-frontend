@@ -34,9 +34,9 @@ const Productdetail = () => {
   return (
     <>
      
-   <h1>Productname:{data.Productname}</h1>
-   <h1> Price:Rs.{data.Price}</h1>
-   <h1>Quantity:{data.Quantity}</h1>
+   <h1>Productname:{data.name}</h1>
+   <h1> Price:Rs.{data.price}</h1>
+   <h1>Quantity:{data.stock}</h1>
    <button onClick={()=>addtocart(data)}>Add to cart</button>
 
     </>

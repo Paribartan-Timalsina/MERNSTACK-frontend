@@ -53,8 +53,8 @@ const App = () => {
 
       <Routes>
         <Route exact path="/" element={<Home />} />
-        < Route exact path="/register" element={<><Header tasks={tasks} title={'Hello to E-DOKO.You can register here if you are new user '} />
-          < Addtasks Addtaskdiv={addtaskdiv} />
+        < Route exact path="/register" element={<>
+          < Addtasks />
           {/* <Tasks tasks={tasks} onDelete={Deletetask} /> */}
         </>} />
         <Route exact path="/show" element={<Tasks tasks={tasks} onDelete={Deletetask} />} />

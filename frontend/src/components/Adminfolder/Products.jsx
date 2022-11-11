@@ -78,8 +78,8 @@ const Products = () => {
 
           Array.from(products)
             .map((product, key) => {
-            const { _id, Productname, Price, Quantity,Category } = product
-            console.log(Productname)
+            const { _id, name, price, company,stock } = product
+            console.log(name)
             // setitemname(items.name)
             // setitemprice(items.price)
             return (
@@ -90,10 +90,10 @@ const Products = () => {
                
                   <div>
                     <li>
-                      <h1>Name:{product.Productname}</h1>
-                      <h1> Price:{product.Price}</h1>
+                      <h1>Name:{product.name}</h1>
+                      <h1> Price:{product.price}</h1>
                       <h1>Quantity:</h1>
-                      <input type="number" min="1" value={product.Quantity} onChange={(e)=>quantitychange(product,e.target.value)}/>
+                      <input type="number" min="1" value={product.stock} onChange={(e)=>quantitychange(product,e.target.value)}/>
                      
                      
                     </li>

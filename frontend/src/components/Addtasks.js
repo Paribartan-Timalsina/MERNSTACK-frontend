@@ -1,10 +1,11 @@
 import React from 'react'
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 const Addtasks = ({ Addtaskdiv }) => {
   const [name, setname] = useState('')
-  const [email, setroll] = useState('')
+  const [email, setemail] = useState('')
   const [password, setpassword] = useState('')
-  const [img, setimg] = useState()
+  const [img, setimg] = useState('')
   const pushing = async () => {
     const formdata = new FormData()
     formdata.append("name", name)
@@ -29,33 +30,48 @@ const Addtasks = ({ Addtaskdiv }) => {
 
     pushing()
 
-    Addtaskdiv({ name, email, img,password })
+    //Addtaskdiv({ name, email, img,password })
     setname('')
-    setroll('')
+    setemail('')
     setimg('')
     setpassword('')
   }
   return (
+<>
+   
+          <form method='POST' className='form-box' onSubmit={onsubmeet} >
+             <div className="input-group mb-3">
 
-    <form method="POST" id="formelem" className='add-form' encType='multipart/form-data' onSubmit={onsubmeet}>
-      <div className='form-control'>
-        <label>Name:</label>
-        <input type='text' value={name} name="name" onChange={(e) => (setname(e.target.value))} />
-      </div>
-      <div className='form-control'>
-        <label>Email:</label>
-        <input type='email' value={email} name="email" onChange={(e) => (setroll(e.target.value))} />
-      </div>
-      <div className='form-control'>
-        <label>Password:</label>
-        <input type='password' value={password} name="password" onChange={(e) => (setpassword(e.target.value))} />
-      </div>
-      <div className='form-control'>
-        <label>profile:</label>
-        <input type='file' name="myimage" onChange={(e) => (setimg(e.target.files[0]))} />
-      </div>
-      <input type='submit' value='Register' className='btn btn-block' />
-    </form>
+<h2>Name:</h2>
+<input type="text" className="form-control" name='name' value={name} placeholder="Full Name" onChange={(e)=>{setname(e.target.value)}}/>
+</div>
+           
+            <div className="input-group mb-3">
+
+              <h2>Email:</h2>
+              <input type="text" className="form-control" name='email' value={email} placeholder="Email" onChange={(e)=>{setemail(e.target.value)}}/>
+            </div>
+            <div className="input-group mb-3">
+              <h2 className=''>Password:</h2>
+              <input type="password" className="form-control" name='password' value={password} placeholder="Password" onChange={(e)=>{setpassword(e.target.value)}}/>
+            </div>
+            <div className="input-group mb-3">
+              <h2>Profile:</h2>
+              <input type="file" className="form-control" name='profile'   onChange={(e)=>{setimg(e.target.files[0])}}/>
+            </div>
+            <div className="input-group mb-3">
+             
+              <input type="submit" value="Register" className="btn btn-secondary btn-block login" />
+            </div>
+            
+
+          </form>
+           <div className="input-group mb-3">
+             
+           <Link to="/signin" >Already have an account.Login here!</Link>
+         </div>
+
+      </> 
   )
 }
 

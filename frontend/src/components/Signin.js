@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import React from 'react'
-import "../index.css"
+import "./Signin.css"
 import { FaUser, FaLock } from "react-icons/fa";
 import CompanyLogo from "../publicimages/Group 2.png"
 import DisplayLogo from "../publicimages/j 1.png"
@@ -12,7 +12,7 @@ import { Link } from 'react-router-dom';
 
 const Signin = () => {
   const navigate = useNavigate()
-  const [name, setname] = useState('')
+  const [password, setpassword] = useState('')
   //const[email,setemail]=useState({name:'',email:''})
   const [email, setemail] = useState('')
   // let naame,value;
@@ -33,7 +33,7 @@ const Signin = () => {
             Accept: "application/json",
 
           },
-          body: JSON.stringify({ name, email }),
+          body: JSON.stringify({ password, email }),
         });
       const dataa = await res;
       if (dataa.status == 400 || dataa.status === 401) {
@@ -55,49 +55,50 @@ const Signin = () => {
     e.preventDefault()
     push()
 
-    setname('')
+    setpassword('')
     setemail('')
 
 
   }
   return (
-<>
-<div className='header'>
+<div>
+      <div className='header'>
 
-        <img src={CompanyLogo} className="companylogo" alt='logo'></img>
+        <img src={CompanyLogo} className="companylogo" alt='logo'/>
       </div>
 
     <div className="container">
       <div>
-        <img src={DisplayLogo} className="displaylogo" alt='logo'></img>
+        <img src={DisplayLogo} className="displaylogo" alt='logo'/>
       </div>
       <div className="form-box">
-        <div className="header-form">
-          <h4 className="text-primary text-center"><i className="fa fa-user-circle" style={{ fontSize: "110px" }}></i></h4>
-          <div className="image">
-          </div>
-        </div>
+       
         <div className="body-form">
-          <form>
+          <form method='POST'  onSubmit={onsubmeet} >
+            <div className='text'>LOGIN HERE</div>
             <div className="input-group mb-3">
 
               <FaUser className='react-icons' />
-              <input type="text" className="form-control" placeholder="Username" />
+              <input type="text" className="form-control" name='email' value={email} placeholder="Email" onChange={(e)=>{setemail(e.target.value)}}/>
             </div>
             <div className="input-group mb-3">
               <FaLock className='react-icons' />
-              <input type="text" className="form-control" placeholder="Password" />
+              <input type="password" className="form-control" name='password' value={password} placeholder="Password" onChange={(e)=>{setpassword(e.target.value)}}/>
             </div>
             <div className="input-group mb-3">
              
-              <button type="button" className="btn btn-secondary btn-block login">LOGIN</button>
+              <input type="submit" value="Login" className="btn btn-secondary btn-block login" />
+            </div>
+            <div className="input-group mb-3">
+             
+             <Link style={{color:"#0dbeb6",fontWeight:"bold",padding:"3%"}} to="/register">Don't have an account go to SIGNUP</Link>
             </div>
           </form>
 
         </div>
       </div>
     </div>
-</>
+</div>
   )
 }
 

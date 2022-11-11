@@ -115,9 +115,9 @@ const Allitems = () => {
                 <Link className='block' to={`/product/${_id}`}>
                   <div className='itemslist'>
                     <li>
-                      <h1>Name:{product.Productname}</h1>
-                      <h1> Price:{product.Price}</h1>
-                      <h1>Category:{product.Category}</h1>
+                      <h1>Name:{product.name}</h1>
+                      <h1> Price:{product.price}</h1>
+                      <h1>Category:{product.company}</h1>
                      
                     </li>
                   </div>

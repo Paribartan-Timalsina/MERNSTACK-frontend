@@ -61,10 +61,10 @@ dispatch(increment(items,e))
               <div className='itemslist'>
 
                 <li>
-                  <h1>Name:{items.Productname}</h1>
-                  <h1> Price:{items.Price}</h1>
-                  <input type="number" min="1" value={items.Quantity} onChange={(e)=>quantitychange(items,e.target.value)} />
-                 <h3>Total:{items.Price*items.Quantity}</h3>
+                  <h1>Name:{items.name}</h1>
+                  <h1> Price:{items.price}</h1>
+                  <input type="number" min="1" value={items.stock} onChange={(e)=>quantitychange(items,e.target.value)} />
+                 <h3>Total:{items.price*items.stock}</h3>
                  
                 </li>
               </div>

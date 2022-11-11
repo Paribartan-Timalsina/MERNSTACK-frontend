@@ -19,7 +19,7 @@ switch(type){
             
            let b= {
             ...state,
-            products:state.products.map(item=>item._id===payload.products._id?{...item,Quantity:payload.value}:item)
+            products:state.products.map(item=>item._id===payload.products._id?{...item,stock:payload.value}:item)
            }       
            console.log(b)      
            return b; 
@@ -35,7 +35,7 @@ export const cartproductReducer=(state=cartinitial,{type,payload})=>{
 
           let a=  {
             ...state,
-            cartitems : inCart ? state.cartitems.map(item=>item._id===payload._id?{...item,Quantity:item.Quantity+1}:item):[...state.cartitems,{...payload,Quantity:1}]
+            cartitems : inCart ? state.cartitems.map(item=>item._id===payload._id?{...item,stock:item.stock+1}:item):[...state.cartitems,{...payload,stock:1}]
            }
            console.log(a)
           return a
@@ -47,7 +47,7 @@ export const cartproductReducer=(state=cartinitial,{type,payload})=>{
                 
                let b= {
                 ...state,
-                cartitems:state.cartitems.map(item=>item._id===payload.products._id?{...item,Quantity:payload.value}:item)
+                cartitems:state.cartitems.map(item=>item._id===payload.products._id?{...item,stock:payload.value}:item)
                }       
                console.log(b)      
                return b; 
