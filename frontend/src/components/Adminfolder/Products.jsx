@@ -3,7 +3,7 @@ import { useReducer } from 'react'
 import { useState,useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch,useSelector } from 'react-redux'
-import { increment,decrement, setProducts } from '../actions/productAction'
+import { increment,decrement, setProducts,priceincrement } from '../actions/productAction'
 const Products = () => {
   const products = useSelector((state) => state.allProducts.products)
  const dispatch=useDispatch()
@@ -13,7 +13,7 @@ const Products = () => {
 
   useEffect(() => {
     getItems();
-    localStorage.setItem("admin",JSON.stringify(products))
+    
   }, []);
   const deleteitem= async (product)=>{
     console.log(product)
@@ -25,7 +25,7 @@ const Products = () => {
         Accept: "application/json",
 
       },
-      body: JSON.stringify({product}),
+      body: JSON.stringify({name:product.name}),
     });
     
     navigate("/admin/productlist/")
@@ -54,6 +54,9 @@ const Products = () => {
  console.log(products)
  const quantitychange=(item,e)=>{
   dispatch(increment(item,e))
+ }
+ const pricechange=(item,e)=>{
+  dispatch(priceincrement(item,e))
  }
  const updatedatabase= async ()=>{
   const res=await fetch("http://localhost:5000/updatedata/",{
@@ -91,10 +94,12 @@ const Products = () => {
                   <div>
                     <li>
                       <h1>Name:{product.name}</h1>
-                      <h1> Price:{product.price}</h1>
-                      <h1>Quantity:</h1>
+                    {/* <h1> Price:{product.price}</h1> */}
+                      <h2>Quantity:</h2>
                       <input type="number" min="1" value={product.stock} onChange={(e)=>quantitychange(product,e.target.value)}/>
-                     
+                      <h2>Price:</h2>
+                      <input type="number" min="1" value={product.price} onChange={(e)=>pricechange(product,e.target.value)}/>
+                     <button style={{margin:"5px", padding:"5px"}} onClick={()=>deleteitem(product)}>Delete this product</button>
                      
                     </li>
                   </div>

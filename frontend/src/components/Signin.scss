@@ -1,0 +1,118 @@
+body
+{
+    background:linear-gradient(to left, green, white);
+    margin:5px;
+    padding:5px;
+    box-sizing:border-box;
+    color:white;
+  }
+  .header
+  {
+    padding:30px;
+    display: flex;
+    
+  }
+  .heading{
+    width: 50%;
+    height: 20%;
+  }
+  .container1
+  {
+    display:flex;
+      align-items:center;
+      justify-content:space-between;
+      height:60vh;
+      width:99%;
+  }
+  .displaylogo
+  {
+    height:590px;
+    width:500px;
+  }
+  .register{
+  
+    width:100%;
+    color:blue;
+
+  }
+  .form-boxregister{
+    width:60vw;
+    height:60vw;
+  }
+  .text
+  {
+    margin-bottom: 10%;
+    font-size: 200%;
+    text-align: center;
+    color:#4d4d4b;
+    font-weight: 1000;
+    
+  }
+  .companylogo
+  {
+    height:100px;
+    width:500px;
+    margin-top: 100px;
+    
+  }
+    .form-box
+    {
+        width:550px;
+        height:450px;
+        background-color:black;
+        padding:20px;
+        display:flex;
+        flex-direction:column;
+        justify-content:flex-start;
+        opacity:0.5;
+        border-radius:2%;
+    }
+  
+  button
+  {
+    margin-top:40px;
+    margin-bottom:10px;
+  }
+  .message
+  {
+    display:flex;
+    justify-content:space-between
+  }
+  .react-icons
+  {
+    margin-top:17px;
+    height:40px;
+    width:60px;
+    color:#98eb1e
+  }
+  .login
+  {
+    margin-top: 50px;
+    padding:2px;
+  }
+  
+  .social
+  {
+    display:flex;
+    justify-content:space-around;
+    padding:30px;
+  }
+  
+  .social i
+  {
+    font-size:35px;
+  }
+  
+  .social i:hover
+  {
+    color:red;
+  }
+  .form-control
+  {
+    margin:2%;
+    padding:2%;
+    height:80%;
+    width:80%;
+    margin-top:20px;
+  
+  }

@@ -23,6 +23,17 @@ switch(type){
            }       
            console.log(b)      
            return b; 
+           case ActionTypes.priceINCREMENT:
+            console.log(state)
+            console.log(payload.products._id)
+            console.log(payload.value)
+            
+           let c= {
+            ...state,
+            products:state.products.map(item=>item._id===payload.products._id?{...item,price:payload.value}:item)
+           }       
+           console.log(c)      
+           return c; 
         default:
             return state;
 }

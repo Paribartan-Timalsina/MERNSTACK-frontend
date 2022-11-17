@@ -20,7 +20,7 @@ const Allitems = () => {
  const navigate=useNavigate()
  const products = useSelector((state) => state.allProducts.products)
  const cartproducts = useSelector((state) => state.cartProducts.cartitems)
- 
+ console.log(products)
 
 
       const addtocart =  (items) => {
@@ -115,10 +115,11 @@ const Allitems = () => {
                 <Link className='block' to={`/product/${_id}`}>
                   <div className='itemslist'>
                     <li>
-                      <h1>Name:{product.name}</h1>
-                      <h1> Price:{product.price}</h1>
-                      <h1>Category:{product.company}</h1>
-                     
+                    {product.name?  <h1>Name:{product.name}</h1>:null}
+                     { product.price? <h1> Price:{product.price}</h1>:null}
+                      {product.company? <h1>Category:{product.company}</h1>:null}
+                   {/* {product.image?  <img src={`data:image/png;base64,${btoa(String.fromCharCode(...new Uint16Array(product.image.data.data)))}`} width="200px" height="200px" alt='naam'/> :null} */}
+                      {product.image?<img src={`http://localhost:5000/${product.image}`}/>:null} 
                     </li>
                   </div>
                 </Link>

@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import React from 'react'
-import "./Signin.css"
+import "./Signin.scss"
 import { FaUser, FaLock } from "react-icons/fa";
 import CompanyLogo from "../publicimages/Group 2.png"
 import DisplayLogo from "../publicimages/j 1.png"
@@ -67,7 +67,7 @@ const Signin = () => {
         <img src={CompanyLogo} className="companylogo" alt='logo'/>
       </div>
 
-    <div className="container">
+    <div className="container1">
       <div>
         <img src={DisplayLogo} className="displaylogo" alt='logo'/>
       </div>

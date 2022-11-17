@@ -6,6 +6,7 @@ import { increment } from './actions/productAction'
 import {connect} from "react-redux"
 import { useEffect } from 'react'
 const Cartitems = ({cart}) => {
+  const [payment,setPayment]=useState()
   console.log(cart)
   const dispatch=useDispatch()
   const cartList=useContext(cartContext)
@@ -14,6 +15,7 @@ localStorage.setItem("newcart",JSON.stringify(cart))
  },[cart])
   
   const   paymoney = async (items)=>{
+   
     try{
     const res= await fetch("/create-checkout-session",{
       method: "POST",
@@ -26,8 +28,8 @@ localStorage.setItem("newcart",JSON.stringify(cart))
         //   { id: 1, quantity: 3 },
         //   { id: 2, quantity: 1 },
         // ],
-        items
-      }),
+      items
+    }),
     })
     .then(res => {
       if (res.ok) return res.json()

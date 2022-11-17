@@ -1,8 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import axios from "axios"
 const Daata = () => {
-  const [info,setInfo]=useState([])
- 
+  
+  useEffect(()=>{
+    getprofile()
+    
+  },[])
+  const [info,setInfo]=useState({})
+ let photouploader;
   const getprofile=async()=>{
     axios.get("/about",{
       method:"GET",
@@ -15,7 +20,7 @@ const Daata = () => {
     }).then((response=>{
       console.log(response.data)
       setInfo(response.data)
-      
+     
       
     }))
     // const data=await profile.json()
@@ -23,10 +28,7 @@ const Daata = () => {
     //  setInfo(data)
     
   }
-  useEffect(()=>{
-    getprofile()
-    
-  },[])
+  
   // const base64String = btoa(String.fromCharCode(...new Uint16Array(info.img.data.data)));
   return (
     
@@ -36,8 +38,8 @@ const Daata = () => {
 
        {       
       < div>
-                      <h1>Name:{info.name}</h1>
-                      <h1> Email:{info.email}</h1>
+                    {info.name?  <h1>Name:{info.name}</h1>:null}
+                    {info.email?  <h1> Email:{info.email}</h1>:null}
               </div>
               
                      
@@ -47,7 +49,7 @@ const Daata = () => {
         
         
               
-           <img src={`data:image/png;base64,${btoa(String.fromCharCode(...new Uint16Array(info.img.data.data)))}`} width="200px" height="200px" alt='naam'/>
+          {info.img? <img src={`data:image/png;base64,${btoa(String.fromCharCode(...new Uint16Array(info.img.data.data)))}`} width="200px" height="200px" alt='naam'/>:null}
               
            
             

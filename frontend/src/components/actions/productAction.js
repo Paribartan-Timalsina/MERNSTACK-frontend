@@ -15,6 +15,15 @@ export const increment=(products,value)=>{
         }
     }
 }
+export const priceincrement=(products,value)=>{
+    return{
+        type:ActionTypes.priceINCREMENT,
+        payload:{
+           products: products,
+           value: value
+        }
+    }
+}
 export const decrement=(Quantity)=>{
     return{
         type:ActionTypes.DECREMENT,
